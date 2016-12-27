@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ${WORKDIR}/config.sh
+source ${WORKDIR}/scripts/config.sh
 
 for i in {1..10}
 do
@@ -22,8 +22,11 @@ do
 	PID=$(ssh 192.168.1.2 pidof testpmd)
 	ret=$?
 	if [ ${ret} -eq 255 ]; then
-		echo "VM is not ready, aborting"
-		exit -1
+		if [ ! -f /dev/shm/ivsh0 ]; then
+			echo "VM is not ready, aborting"
+			exit -1
+		fi
+		continue
 	fi
 
 	if [ ${ret} -eq 1 ]; then
@@ -32,10 +35,11 @@ do
 
 	if [ ${PID} -gt 0 ]; then
 		break
-	fi 
+	fi
 
 done
 
+sleep 5
 ${ovs_vsctl} add-port ovsbr0 ivsh0 \
 	-- set interface ivsh0 type=dpdkhshmem ofport_request=20
 

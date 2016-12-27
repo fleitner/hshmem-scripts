@@ -5,6 +5,6 @@ SCRIPT_LIST="01-kill-vm.sh 02-setup.sh 03-ovs-clean.sh 04-ovs.sh 05-ovs-ports-fl
 
 for script in ${SCRIPT_LIST}; do
 	echo "Running $script"
-	sh ${script} || exit 1
+	sh ${WORKDIR}/scripts/${script} || exit 1
 done
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ${WORKDIR}/config.sh
+source ${WORKDIR}/scripts/config.sh
 
 pkill -9 -f ovs-vswitchd
 pkill -9 -f ovsdb-server
@@ -27,3 +27,4 @@ fi
 dmesg -c > /dev/null
 
 rm -f /dev/shm/ivsh0
+sleep 1

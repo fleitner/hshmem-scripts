@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ${WORKDIR}/config.sh
+source ${WORKDIR}/scripts/config.sh
 
 
 ${ovs_vsctl} add-br ovsbr0 \
@@ -25,6 +25,6 @@ cat ${prefix}/var/log/openvswitch/ovs-vswitchd.log
 #	taskset -p -c 5,6 ${pid}
 #done
 
-tuna -t ovs-vswitchd -CP 
+#tuna -t ovs-vswitchd -CP
 
 

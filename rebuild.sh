@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source  ${WORKDIR}/config.sh
+source  ${WORKDIR}/scripts/config.sh
 
 function build_ovs()
 {
@@ -29,13 +29,13 @@ function build_ovs()
 	ldd ${prefix}/sbin/ovs-vswitchd | grep -q ${OVS_VSWITCHD_DPDK}
 	if [ $? -ne 0 ]; then
 		echo "DPDK link not found"
-	fi 
+	fi
 }
 
 
 function build_dpdk()
 {
-	pushd `pwd` 
+	pushd `pwd`
 	cd dpdk
 	export RTE_SDK="${WORKDIR}/dpdk"
 	export RTE_TARGET="x86_64-native-linuxapp-gcc"
@@ -44,7 +44,7 @@ function build_dpdk()
 	rm -f /usr/local/lib/libdpdk.so
 	rm -rf /usr/local/lib*/*rte*
 
-	make T=x86_64-native-linuxapp-gcc config 
+	make T=x86_64-native-linuxapp-gcc config
 	make -j8 install DESTDIR=/usr/local T=x86_64-native-linuxapp-gcc EXTRA_CFLAGS='-O0 -g -ggdb'
 	#make -j8 install DESTDIR=/usr/local T=x86_64-native-linuxapp-gcc
 	ldconfig

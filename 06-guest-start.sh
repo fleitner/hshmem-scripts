@@ -1,5 +1,6 @@
+#!/bin/bash
 
-source ${WORKDIR}/config.sh
+source ${WORKDIR}/scripts/config.sh
 
 case ${nr_q} in
   0)
@@ -55,4 +56,4 @@ numactl -i ${qemu_socket} \
     -device ivshmem-plain,memdev=ivsh0 \
     -netdev bridge,br=br0,id=hostnet0 \
     -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:17:aa:7c \
-    -hda f22-mq-1.img  2>&1 > qemu.log &
+    -hda ${WORKDIR}/f22-mq-1.img  2>&1 > qemu.log &

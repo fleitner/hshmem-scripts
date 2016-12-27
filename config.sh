@@ -1,5 +1,5 @@
 
-source ${WORKDIR}/config-env.sh
+source ${WORKDIR}/scripts/config-env.sh
 
 # Generic
 socket=0
@@ -14,7 +14,7 @@ _prefix="/usr"
 if [ ! -z "${prefix}" ]; then
     _prefix="${prefix}"
 fi
-	
+
 ovsdb_tool="${_prefix}/bin/ovsdb-tool"
 ovs_vsctl="${_prefix}/bin/ovs-vsctl"
 ovs_ofctl="${_prefix}/bin/ovs-ofctl"

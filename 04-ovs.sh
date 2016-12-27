@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ${WORKDIR}/config.sh
+source ${WORKDIR}/scripts/config.sh
 
 echo "rxqs=${nr_q} cpu-mask=${OVSDPDK_LCOREMASK}"
 if [ ! -f ${prefix}/etc/openvswitch/conf.db ]; then
@@ -46,7 +46,7 @@ fi
 
 
 # Run ovs-vswitchd
-#numactl -i ${ovs_socket} 
+#numactl -i ${ovs_socket}
 	${ovs_vswitchd} \
 	${VSWITCHD_DPDK_PARAM} \
 	unix:${prefix}/var/run/openvswitch/db.sock \
@@ -54,3 +54,4 @@ fi
 	--log-file=${prefix}/var/log/openvswitch/ovs-vswitchd.log \
 	--pidfile=${prefix}/var/run/openvswitch/ovs-vswitchd.pid \
 	--mlockall --no-chdir  2>&1 > vswitchd.log &
+

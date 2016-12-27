@@ -7,10 +7,10 @@ function set_qemu_affinity() {
 
 	for qemu in $(ps -e -T | awk '/qemu-system-x86/ { print $2 }' | grep -v ${QEMU_PID})
 	do
-		taskset -p -c 3-4 ${qemu}
+		taskset -p -c 3-4 ${qemu} >/dev/null
 	done
 
-	taskset -p -c 2 ${QEMU_PID}
+	taskset -p -c 2 ${QEMU_PID} > /dev/null
 }
 
 function check_testpmd() {
@@ -46,7 +46,7 @@ fi
 delay_and_set_affinity &
 
 echo "Run /root/testpmd.sh"
-ssh root@192.168.1.2 
+ssh root@192.168.1.2
 # /root/testpmd.sh
 
 
